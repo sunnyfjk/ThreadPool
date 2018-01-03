@@ -4,7 +4,7 @@
  * @Email:  sunnyfjk@gmail.com
  * @Filename: ThreadModule.c
  * @Last modified by:   fjk
- * @Last modified time: 2018-01-03T16:03:57+08:00
+ * @Last modified time: 2018-01-03T16:17:34+08:00
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,7 +21,7 @@ static void *ThreadWork(void *arg)
         while(1)
         {
                 pthread_mutex_lock(&t->ThreadMutex);
-                while(t->ThreadJobRoot.JobNodeSize < 0 || (t->ThreadOperation.Operation != THREAD_OPERATION_RUN)) {
+                while(t->ThreadJobRoot.JobNodeSize <= 0 || (t->ThreadOperation.Operation != THREAD_OPERATION_RUN)) {
                         if(t->ThreadOperation.Operation==THREAD_OPERATION_CLOSE) {
                                 t->ThreadState.State=THREAD_STATE_CLOSE;
                                 pthread_cond_broadcast(&t->ThreadCond);
