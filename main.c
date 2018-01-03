@@ -4,7 +4,7 @@
  * @Email:  sunnyfjk@gmail.com
  * @Filename: main.c
  * @Last modified by:   fjk
- * @Last modified time: 2018-01-03T16:00:34+08:00
+ * @Last modified time: 2018-01-03T16:18:15+08:00
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -66,6 +66,7 @@ int main( void )
         if(t==NULL)
                 return -1;
         printf("[%s:%d] add Job Satrt\n",__FUNCTION__,__LINE__);
+        StartThread(t);
         for(i=0; i<100; i++) {
                 tj=NewThreadJob(&callback,(void *)i);
                 if(tj==NULL)
@@ -74,8 +75,8 @@ int main( void )
         }
         printf("[%s:%d] add Job end\n",__FUNCTION__,__LINE__);
         printf("[%s:%d] StartThread\n",__FUNCTION__,__LINE__);
-        StartThread(t);
-        sleep(10);
+        // StartThread(t);
+        // sleep(10);
         printf("[%s:%d] StopThread\n",__FUNCTION__,__LINE__);
         StopThread(t);
         sleep(10);
