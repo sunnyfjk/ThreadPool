@@ -4,7 +4,7 @@
  * @Email:  sunnyfjk@gmail.com
  * @Filename: list.h
  * @Last modified by:   fjk
- * @Last modified time: 2017-12-30T21:25:06+08:00
+ * @Last modified time: 2017-12-31T22:37:49+08:00
  */
 
 #ifndef _LINUX_LIST_H
@@ -29,14 +29,6 @@
 
 #ifndef WRITE_ONCE
 #define WRITE_ONCE(x,y) (x=y)
-#endif
-
-#ifndef LIST_POISON1
-#define LIST_POISON1  ((void *) 0x00100100)
-#endif
-
-#ifndef LIST_POISON2
-#define LIST_POISON2  ((void *) 0x00200200)
 #endif
 
 struct list_head {

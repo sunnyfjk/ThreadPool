@@ -4,35 +4,53 @@
  * @Email:  sunnyfjk@gmail.com
  * @Filename: main.c
  * @Last modified by:   fjk
- * @Last modified time: 2017-12-30T22:25:03+08:00
+ * @Last modified time: 2018-01-03T09:25:12+08:00
  */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ThreadPoll.h>
+#include <ThreadPool.h>
 #include <unistd.h>
 
-void work(void *arg)
+static void workStart(void *arg)
 {
-
+        sleep(1);
+        printf("Job Start %d\n",(int)arg);
+}
+static void workStop(void *arg)
+{
+        sleep(1);
+        printf("Job Stop %d\n",(int)arg);
 }
 
 int main( void )
 {
-        int i=0;
-        TPool_t *tp;
-        struct TPoolConfig_t st;
-        st.MaxPoolSize=100;
-        st.MaxWorkSize=1000;
-
-        tp=TPoolNew(&st);
-
-        for(i=0; i<5; i++)
+        int i = 0;
+        struct ThreadPool_t *pool=NULL;
+        struct Job_t *job=NULL;
+        static struct ThreadPoolConfig_t conf={
+                .MaxJobSize=1000,
+                .MaxPoolSize=5,
+        };
+        static struct JobCallback_t jc={
+                .JobCallbackRun=workStart,
+                .JobCallbackStop=workStop,
+        };
+        pool=ThreadPoolNew(&conf);
+        if(pool==NULL)
+                return -1;
+        printf("[%s:%d] add Job Satrt\n",__FUNCTION__,__LINE__);
+        for(i=0; i<1000; i++)
         {
 
-                TPoolAddJop(tp,work,NULL);
+                job=JobNew(&jc,(void *)i);
+                if(job==NULL)
+                        continue;
+                ThreadPoolJobAdd(pool,job);
+
         }
-        while(1) ;
-        TPoolFree(tp);
+        printf("[%s:%d] add Job End\n",__FUNCTION__,__LINE__);
+        ThreadPoolFree(pool);
+
         return 0;
 }
