@@ -4,7 +4,11 @@
  * @Email:  sunnyfjk@gmail.com
  * @Filename: ThreadModule.c
  * @Last modified by:   fjk
- * @Last modified time: 2018-01-04T10:52:10+08:00
+   <<<<<<< HEAD
+ * @Last modified time: 2018-01-04T10:57:00+08:00
+   =======
+ * @Last modified time: 2018-01-04T10:57:00+08:00
+   >>>>>>> 7cf45ae76b8e80cd01b36b962aa5f082be629357
  */
 #include <stdio.h>
 #include <stdlib.h>
