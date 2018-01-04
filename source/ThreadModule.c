@@ -5,9 +5,9 @@
  * @Filename: ThreadModule.c
  * @Last modified by:   fjk
    <<<<<<< HEAD
- * @Last modified time: 2018-01-04T11:09:22+08:00
+ * @Last modified time: 2018-01-04T15:16:09+08:00
    =======
- * @Last modified time: 2018-01-04T11:09:22+08:00
+ * @Last modified time: 2018-01-04T15:16:09+08:00
    >>>>>>> 7cf45ae76b8e80cd01b36b962aa5f082be629357
  */
 #include <stdio.h>
@@ -42,15 +42,15 @@ static void *ThreadWork(void *arg)
                 t->ThreadState.State=THREAD_STATE_RUN;
                 pthread_cond_broadcast(&t->ThreadCond);
                 pthread_mutex_unlock(&t->ThreadMutex);
-                PERR("\n");
+
                 if(tj->CallBackFunction.CallBackStart!=NULL) {
                         (tj->CallBackFunction.CallBackStart)(tj->arg);
                 }
-                PERR("\n");
+
                 if(tj->CallBackFunction.CallBackStop!=NULL) {
                         (tj->CallBackFunction.CallBackStop)(tj->arg);
                 }
-                PERR("\n");
+
                 free(tj);
         }
 THREAD_CLOSE:

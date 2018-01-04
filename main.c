@@ -4,28 +4,28 @@
  * @Email:  sunnyfjk@gmail.com
  * @Filename: main.c
  * @Last modified by:   fjk
- * @Last modified time: 2018-01-03T16:18:15+08:00
+ * @Last modified time: 2018-01-04T17:35:29+08:00
  */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <ThreadModule.h>
-#if defined(__THREAD_MOUDLE_H__) || defined(__INCLUDE_THREAD_POOL_H__)
+#include <ThreadPoolModule.h>
+#if 1
 static void workStart(void *arg)
 {
-        sleep(1);
+        // sleep(1);
         printf("Job Start %d\n",(int)arg);
 }
 static void workStop(void *arg)
 {
-        sleep(1);
+        // sleep(1);
         printf("Job Stop %d\n",(int)arg);
 }
 #endif
 int main( void )
 {
-  #if defined(__INCLUDE_THREAD_POOL_H__)
+  #if 0
         int i = 0;
         struct ThreadPool_t *pool=NULL;
         struct Job_t *job=NULL;
@@ -53,7 +53,7 @@ int main( void )
         printf("[%s:%d] add Job End\n",__FUNCTION__,__LINE__);
         ThreadPoolFree(pool);
   #endif
-  #if defined(__THREAD_MOUDLE_H__)
+  #if 0
         struct Thread_t *t=NULL;
         struct ThreadJob_t *tj=NULL;
         struct CallBackFunction_t callback={
@@ -87,5 +87,23 @@ int main( void )
         FreeThread(t,NULL);
 
   #endif
+        int i=0;
+        struct ThreadPool_t *pool=NULL;
+        struct ThreadJob_t *tj=NULL;
+        struct CallBackFunction_t callback={
+                .CallBackStart=workStart,
+                .CallBackStop=workStop,
+        };
+        pool=NewThreadPool(20);
+        for(i=0; i<100; i++) {
+                tj=NewThreadJob(&callback,(void *)i);
+                if(tj==NULL)
+                        continue;
+                AddThreadPoolJob(pool,tj);
+        }
+        printf("[%s:%d]\n",__FUNCTION__,__LINE__);
+        sleep(1);
+        printf("[%s:%d]\n",__FUNCTION__,__LINE__);
+        FreeThreadPool(pool);
         return 0;
 }
