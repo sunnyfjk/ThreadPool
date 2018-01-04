@@ -4,7 +4,7 @@
  * @Email:  sunnyfjk@gmail.com
  * @Filename: ThreadModule.c
  * @Last modified by:   fjk
- * @Last modified time: 2018-01-03T16:17:34+08:00
+ * @Last modified time: 2018-01-04T10:52:10+08:00
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -246,4 +246,17 @@ void FreeThreadJob(struct ThreadJob_t * tj)
                 (tj->CallBackFunction.CallBackStop)(tj->arg);
         }
         free(tj);
+}
+int GetThreadJobSize(struct Thread_t *t){
+        int num=0;
+        int ret=0;
+        if(t==NULL)
+                return -1;
+        ret=pthread_mutex_lock(&t->ThreadMutex);
+        if(ret<0)
+                return -1;
+        num=t->ThreadJobRoot.JobNodeSize;
+        pthread_cond_broadcast(&t->ThreadCond);
+        pthread_mutex_unlock(&t->ThreadMutex);
+        return num;
 }
