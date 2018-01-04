@@ -4,7 +4,7 @@
  * @Email:  sunnyfjk@gmail.com
  * @Filename: ThreadModule.h
  * @Last modified by:   fjk
- * @Last modified time: 2018-01-03T15:12:55+08:00
+ * @Last modified time: 2018-01-04T10:46:16+08:00
  */
 #ifndef __THREAD_MOUDLE_H__
 #define __THREAD_MOUDLE_H__
@@ -60,6 +60,8 @@ void FreeThread(struct Thread_t *t,struct ThreadJobRoot_t *ThreadJobRoot);
 int SetThreadOpetation(struct Thread_t *t,struct ThreadOperation_t *to);
 
 int GetThreadState(struct Thread_t *t,struct ThreadState_t *ts);
+
+int GetThreadJobSize(struct Thread_t *t);
 
 int AddThreadJob(struct Thread_t *t,struct ThreadJob_t *tj);
 
