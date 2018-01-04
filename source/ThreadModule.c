@@ -5,9 +5,9 @@
  * @Filename: ThreadModule.c
  * @Last modified by:   fjk
    <<<<<<< HEAD
- * @Last modified time: 2018-01-04T10:57:00+08:00
+ * @Last modified time: 2018-01-04T11:09:22+08:00
    =======
- * @Last modified time: 2018-01-04T10:57:00+08:00
+ * @Last modified time: 2018-01-04T11:09:22+08:00
    >>>>>>> 7cf45ae76b8e80cd01b36b962aa5f082be629357
  */
 #include <stdio.h>
@@ -32,13 +32,14 @@ static void *ThreadWork(void *arg)
                                 pthread_mutex_unlock(&t->ThreadMutex);
                                 goto THREAD_CLOSE;
                         }
-                        t->ThreadState.State=THREAD_STATE_WAIT;
+                        t->ThreadState.State=THREAD_STATE_WAIT; pthread_cond_broadcast(&t->ThreadCond);
                         pthread_cond_wait(&t->ThreadCond,&t->ThreadMutex);
                 }
-                t->ThreadState.State=THREAD_STATE_RUN;
+
                 tj=list_last_entry(&(t->ThreadJobRoot.JobRoot),struct ThreadJob_t,JobNode);
                 list_del_init(&tj->JobNode);
                 t->ThreadJobRoot.JobNodeSize--;
+                t->ThreadState.State=THREAD_STATE_RUN;
                 pthread_cond_broadcast(&t->ThreadCond);
                 pthread_mutex_unlock(&t->ThreadMutex);
                 PERR("\n");
