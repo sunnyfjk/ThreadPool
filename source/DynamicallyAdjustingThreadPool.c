@@ -4,7 +4,11 @@
  * @Email:  sunnyfjk@gmail.com
  * @Filename: DynamicallyAdjustingThreadPool.c
  * @Last modified by:   fjk
+<<<<<<< HEAD
  * @Last modified time: 2018-01-06T14:12:14+08:00
+=======
+ * @Last modified time: 2018-01-06T14:01:00+08:00
+>>>>>>> d4bc0ca56d5cc2704f38f638f6d0333d22e8bbea
  */
 #include <DynamicallyAdjustingThreadPool.h>
 
