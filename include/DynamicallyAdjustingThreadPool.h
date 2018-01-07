@@ -4,11 +4,11 @@
  * @Email:  sunnyfjk@gmail.com
  * @Filename: DynamicallyAdjustingThreadPool.h
  * @Last modified by:   fjk
-<<<<<<< HEAD
- * @Last modified time: 2018-01-06T14:12:06+08:00
-=======
- * @Last modified time: 2018-01-06T01:25:21+08:00
->>>>>>> d4bc0ca56d5cc2704f38f638f6d0333d22e8bbea
+   <<<<<<< HEAD
+ * @Last modified time: 2018-01-07T17:33:27+08:00
+   =======
+ * @Last modified time: 2018-01-07T17:33:27+08:00
+   >>>>>>> d4bc0ca56d5cc2704f38f638f6d0333d22e8bbea
  */
 #ifndef __DYNAMICALLY_ADJUSTING_THREAD_POOL__
 #define __DYNAMICALLY_ADJUSTING_THREAD_POOL__
@@ -46,7 +46,6 @@ struct WorkThread_t {
         pthread_cond_t ThreadCond;
         int ThreadSwitch;
         int ThreadState;
-        struct Job_t *Job;
         struct DAThreadPool_t *DAThreadPool;
 };
 struct DAThreadPool_t {
